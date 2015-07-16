@@ -27,5 +27,5 @@ if [ "$DEBUG" = true ]; then
   echo
 fi
 
-fuel node --list $env 2 >/dev/null | awk -F '|' -v r=$role 'NR>2 &&$7~r {print $1}'
+fuel node --list $env 2>/dev/null | awk -F '|' -v r=$role 'NR>2 &&$7~r {print $1}' | sort
 
