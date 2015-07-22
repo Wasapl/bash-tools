@@ -48,8 +48,11 @@ _fuel61_tasks()
 }
 _fuel61_roles()
 {
-    #frankly we shoud concatenate roles from all releases
-    _fuel61_get_first_column $1 "role --release 1"
+    #frankly we shoud concatenate roles from both releases
+    local r1 r2
+    _fuel61_get_first_column r1 "role --release 1"
+    _fuel61_get_first_column r2 "role --release 2"
+    eval "$1=\"$r1 $r2\""
 }
 _fuel61_nodes()
 {
@@ -74,9 +77,8 @@ _fuel61_nodes_macs()
 
 _fuel61_completion()
 {
-    local ns nss opts cur ind nsopts
+    local ns nss opts cur ind nsopts words words1 words2
     _fuel61_help opts
-    #opts="-h --help -v --version --fuel-version --debug --user --password --tenant --yaml --json"
     nss="notify plugins network graph provisioning environment deploy-changes role healh nodegroup node stop notifications user deployment reset task setting token snapshot release vmware-settings"
     # Find the namespace
     for ind in $( seq 1 $(($COMP_CWORD-1)) ) ; do
