@@ -25,4 +25,4 @@ if [ "$DEBUG" = true ]; then
   echo "Role $role"
 fi
 
-for no in `./getnodes.sh $env $role`; do echo $no; ssh node-$no $1 2>/dev/null; done
+for no in `./getnodes.sh $env $role`; do echo $no; ssh node-$no $* 2\>\&1 2>/dev/null; done
