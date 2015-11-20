@@ -7,5 +7,8 @@ for node in "${nodes[@]}"
 do
   echo "a=\"$node\""
   IFS='=' read -r -a arr <<< "$node" 
+  var=${arr[0]}
+  var="${var%"${var##*[![:space:]]}"}"
+  scp ./motd node-${var}:/etc/motd
   ssh node-${arr[0]} "echo ROLES: ${arr[1]}>>/etc/motd"
 done
