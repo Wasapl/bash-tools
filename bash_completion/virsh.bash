@@ -30,7 +30,7 @@ _virsh_domain_shut()
 
 _virsh_network()
 {
-    networks=$(virsh --readonly --quiet net-list --all | cut -d ' ' -f 1)
+    networks=$(virsh --readonly --quiet net-list --all | awk '{print $1}')
     COMPREPLY=( ${COMPREPLY[@]:-} $(compgen -W "$networks" -- $cur) )
 }
 
@@ -48,7 +48,7 @@ _virsh_options()
 
 _virsh_pool()
 {
-    pools=$(virsh  --readonly --quiet pool-list --all | cut -d ' ' -f 1)
+    pools=$(virsh  --readonly --quiet pool-list --all | awk '{print $1}')
     COMPREPLY=( ${COMPREPLY[@]:-} $(compgen -W "$pools" -- $cur) )
 }
 
@@ -56,7 +56,7 @@ _virsh_snapshots()
 {
     local domain snapshots
     domain=$1
-    snapshots=$(virsh --quiet snapshot-list $domain |cut -d ' ' -f 2)
+    snapshots=$(virsh --quiet snapshot-list $domain | awk '{print $1}')
     COMPREPLY=( ${COMPREPLY[@]:-} $(compgen -W "$snapshots" -- $cur) )
 }
 
