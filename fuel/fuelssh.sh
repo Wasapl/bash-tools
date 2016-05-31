@@ -4,7 +4,7 @@ DEBUG=false
 env=""
 status=""
 role=""
-while getopts "e:r:s:" arg; do
+while getopts "e:s:r:" arg; do
   case $arg in
     e )
       env="-e $OPTARG"

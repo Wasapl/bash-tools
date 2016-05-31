@@ -26,6 +26,7 @@ done
 if [ "$DEBUG" = true ]; then
   echo "env $env"
   echo "Role $role"
+  echo "Status $status"
   echo "fuel node --list $env | awk -F '|' -v s=$status -v r=$role 'NR>2 && \$7~r && \$2~s {print \$1}'"
   echo
   echo
