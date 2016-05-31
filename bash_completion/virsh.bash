@@ -64,7 +64,7 @@ _virsh_ifaces()
 {
     local domain ifaces
     domain=$1
-    ifaces=$(virsh --quiet domiflist $domain |awk 'NR>2{print $1}')
+    ifaces=$(virsh --quiet domiflist $domain |awk '{print $1}')
     COMPREPLY=( ${COMPREPLY[@]:-} $(compgen -W "$ifaces" -- $cur) )
 }
 
