@@ -29,4 +29,11 @@ if [ "$DEBUG" = true ]; then
   echo "Role $role"
 fi
 
-for no in `./getnodes.sh $env $status $role`; do echo $no; ssh node-$no $* 2\>\&1 2>/dev/null; done
+for no in `./getnodes.sh $env $status $role`; do
+  echo $no
+  ssherr="$(mktemp)"
+  ssh $no $* 2\>\&1 2>$ssherr
+  if [ $? -ne 0 ]; then
+    cat $ssherr
+  fi
+done
